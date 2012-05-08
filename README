@@ -1,0 +1,31 @@
+Simple caching decorator that allows you to use redis like a cache.
+
+from ncache import cachable
+
+@cachable(seconds=500)
+def sum(a,b):
+    return a+b
+
+sum(4,5) # an expensive calculation indeed :-)
+
+9 is cached
+
+By default the function name and arguments are conconated to create the key and all values are pickled before adding to the cache
+
+@cachable() # sets a key permanently
+
+@cachable(seconds=300) # caches for 300 seconds
+
+@cachable(key_name='mykey') # sets a specific key_name
+
+@cachable(pickled=True, hash_keys=False) # Will pickle values before storing them but no hash the key name.  This is the default behaviour
+
+@cachable(prefix="STORE1") # Will prefix all keys with the plain text STORE1. this is handy for group deleting certain ranges of keys.
+
+@cachable()
+def sum(a, b):
+    return a + b
+
+By default the key name is the function name _ *args _ **kw.  So sum(3, 4) is caches as key "sum_(3, 4)_{}"
+
+
