@@ -1,4 +1,4 @@
-# ncache
+ncache
 
 Simple caching decorator that allows you to use redis like a cache.
 
