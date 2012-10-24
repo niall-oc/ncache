@@ -11,13 +11,14 @@ import cPickle as pickle
 from functools import wraps
 
 #Redis cache for this module
-r_conn = redis.Redis(host='127.0.0.1', port=6379, db=0)
+#r_conn = redis.Redis(host='127.0.0.1', port=6379, db=0)
 
 #####################################################################
 ##########           Caching decorator            ###################
 #####################################################################
 
-def cachable(seconds=None, prefix='', key_name=None, hash_keys=False, pickled=True):
+def cachable(seconds=None, prefix='', key_name=None, hash_keys=False, 
+             pickled=True, r_conn=redis.Redis(host='127.0.0.1', port=6379, db=0)):
     """
     Decorate an expensive calculation to save on computing. All values are 
     pickled before being stored.  Keys may be hashed for some security.
