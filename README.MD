@@ -5,18 +5,21 @@ Its too slow to do this in python.  Its not really a production ready thing.  So
 
 Run server
 ----------
-' >>> from ncache import run_ncache
-' >>> run_ncache()
-
+```python
+>>> from ncache import run_ncache
+>>> run_ncache()
+```
 Run client
 ----------
-' >>> from ncache_client import NCache
-' >>> cache = NCache()
-' >>> cache.set('hello', 'world')
-' >>> cache.get('hello')
-' world
-' >>> cache.set('hello', 'world', seconds=5)
-' >>> # wait 6 seconds.
-' >>> cache.get('hello')
-'
+```python
+>>> from ncache_client import NCache
+>>> cache = NCache()
+>>> cache.set('hello', 'world')
+>>> cache.get('hello')
+world
+>>> cache.set('hello', 'world', seconds=5)
+>>> # wait 6 seconds.
+>>> cache.get('hello')
+
+```
 
