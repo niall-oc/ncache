@@ -30,16 +30,18 @@ def func2key(func, *args, **kw):
 class NCache(object):
     def __init__(self, ip='127.0.0.1', port=5005, buffer=1024, key_rexp="[\w\d-]{2,}", pickled=True):
         """
-        Create a cache object bound to a location in sandra.  If the location does not exist then it is created.
+        Create a new cache key.
 
-        :param str location: The default sandra location for this cache object to store keys.
-        :param str db_name: The name of the database you wish to connect too
-
+        :param str ip: Ip address of tcp server.
+        :param str port: Port number of tcp server.
+        :param int buffer: TCP buffer size.
+        :param str key_regx: Key names must match this regex.
+        :param bool pickled: Pickle data when recording them.
         usage:
-            >>> my_cache = Cache(location="/Risk/Emerald/Pnl/Reports", db_name='risk_emerald')
-            >>> my_cache.set('Pnl-Clients', pnl_adapter.get_clients())
-            >>> my_cache.get('Pnl-Clients')
-            pnl data...
+            >>> my_cache = NCache()
+            >>> my_cache.set('Something', 'Not nothing')
+            >>> my_cache.get('Something')
+            Not nothing
         """
         super(NCache, self).__init__()
         self.conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -51,7 +53,7 @@ class NCache(object):
 
     def _execute_command(self, command):
         """
-        Execute the constructed commend and handle the response.
+        Execute the constructed command and handle the response.
         """
         self.conn.send(command)
         response = self.conn.recv(self.buffer_size)
