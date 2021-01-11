@@ -65,7 +65,7 @@ def _clear_perm_keys(chunk_size):
 
     :param int chunk_size: The number of keys to clear.
     """
-    keys = [(key, val[1],) for key, val in cache_timeouts.iteritems() if val[0] == 'perm']
+    keys = [(key, val[1],) for key, val in cache_timeouts.items() if val[0] == 'perm']
     keys = sorted(keys, key=lambda x: x[1], reverse=False)
     keys = keys[:chunk_size]
     for key, _ in keys:
@@ -78,7 +78,7 @@ def _clear_ttl_keys(future):
 
     :param datetime.datetime future: Future date used to expire keys.
     """
-    keys = [(key, val[1],) for key, val in cache_timeouts.iteritems() if val[0] == 'ttl']
+    keys = [(key, val[1],) for key, val in cache_timeouts.items() if val[0] == 'ttl']
     for key, expiry in keys:
         if expiry < future:
             cache_timeouts.pop(key, None)
